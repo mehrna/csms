@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  slim:
+    image: php:8-alpine
+    working_dir: /var/www
+    command: php -S 0.0.0.0:8000 -t public
+    environment:
+      docker: "true"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www
+      - logs:/var/www/logs
+  composer:
+    image: composer:latest
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+volumes:
+  logs:
+    driver: local
