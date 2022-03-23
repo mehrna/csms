@@ -13,7 +13,7 @@ class ActionPayload implements JsonSerializable
     /**
      * @var array|object|null
      */
-    private $data;
+    private mixed $data;
 
     private ?ActionError $error;
 
