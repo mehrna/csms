@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Actions;
 
+use App\Application\Exception\HttpValidationErrorException;
+use App\Application\Exception\ValidationException;
 use App\Domain\DomainException\DomainRecordNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,15 +39,19 @@ abstract class Action
         $this->args = $args;
 
         try {
+            /** @throws */
             return $this->action();
         } catch (DomainRecordNotFoundException $e) {
             throw new HttpNotFoundException($this->request, $e->getMessage());
+        } catch (ValidationException $e) {
+            throw new HttpValidationErrorException($this->request, $e->getMessage());
         }
     }
 
     /**
      * @throws DomainRecordNotFoundException
      * @throws HttpBadRequestException
+     * @throws ValidationException
      */
     abstract protected function action(): Response;
 
@@ -54,7 +60,7 @@ abstract class Action
      */
     protected function getFormData(): object|array
     {
-        return $this->request->getParsedBody();
+        return $this->request->getParsedBody() ?? [];
     }
 
     /**

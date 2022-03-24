@@ -11,8 +11,6 @@ RUN chown -R www-data:www-data /var/www
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
-#ENV docker true
-
 EXPOSE 8000
 
 CMD [ "php", "-S", "0.0.0.0:8000", "-t", "public" ]

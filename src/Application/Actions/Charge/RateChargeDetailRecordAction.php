@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Actions\Charge;
 
 use App\Application\Actions\Action;
+use App\Application\Exception\ValidationException;
+use App\Application\Validation\Charge\RateChargeValidator;
 use App\Domain\Charge\ChargeDetailRecord;
 use App\Domain\Charge\ChargeRepository;
 use App\Domain\Charge\Rate;
@@ -27,10 +29,13 @@ class RateChargeDetailRecordAction extends Action
 
     /**
      * @throws \JsonException
+     * @throws ValidationException
      */
     protected function action(): Response
     {
         $inputs = $this->getFormData();
+        $validator = new RateChargeValidator();
+        $validator->validate($inputs);
 
         $rate = Rate::cast($inputs['rate'] ?? []);
         $rateId = $this->rateRepository->store($rate);
@@ -39,6 +44,7 @@ class RateChargeDetailRecordAction extends Action
         $this->chargeRepository->store($cdr, $rateId);
 
         $rateCalculator = new RateCalculator($rate, $cdr);
+        $this->logger->info('test', [$rateCalculator]);
 
         return $this->respondWithData($rateCalculator);
     }
