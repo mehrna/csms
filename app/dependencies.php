@@ -27,4 +27,25 @@ return static function (ContainerBuilder $containerBuilder) {
             return $logger;
         },
     ]);
+
+    $containerBuilder->addDefinitions([
+        PDO::class => function (ContainerInterface $c) {
+            $settings = $c->get(SettingsInterface::class);
+            $dbSettings = $settings->get('db');
+
+            $host = $dbSettings['host'];
+            $dbname = $dbSettings['database'];
+            $username = $dbSettings['username'];
+            $password = $dbSettings['password'];
+            $charset = $dbSettings['charset'];
+            $flags = $dbSettings['flags'];
+            $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+            try {
+                return new PDO($dsn, $username, $password, $flags);
+            } catch (Exception $exception) {
+                throw new RuntimeException('Error establishing a database connection: ' . $exception->getMessage());
+            }
+        },
+    ]);
 };
