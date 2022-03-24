@@ -40,7 +40,7 @@ return static function (ContainerBuilder $containerBuilder) {
             $charset = $dbSettings['charset'];
             $flags = $dbSettings['flags'];
 
-            if (TEST_ENV) {
+            if (defined('TEST_ENV')) {
                 $dbTestSettings = $settings->get('db_test');
                 $dbname = $dbTestSettings['database'];
                 $username = $dbTestSettings['username'];
