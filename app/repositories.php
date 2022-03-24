@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Domain\User\UserRepository;
-use App\Infrastructure\Persistence\User\InMemoryUserRepository;
+use App\Domain\Charge\RateRepository;
+use App\Infrastructure\Persistence\Charge\MySqlRateRepository;
 use DI\ContainerBuilder;
 
 return static function (ContainerBuilder $containerBuilder) {
-    // Here we map our UserRepository interface to its in memory implementation
+    // Here we map our RateRepository interface to its MySql implementation
     $containerBuilder->addDefinitions([
-        UserRepository::class => \DI\autowire(InMemoryUserRepository::class),
+        RateRepository::class => \DI\autowire(MySqlRateRepository::class),
     ]);
 };
