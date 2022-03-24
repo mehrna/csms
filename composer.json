@@ -1,53 +1,57 @@
 {
-    "name": "csmc/rate-cdr",
-    "description": "Implement a small RESTful API that Will apply the given rate to the corresponding CDR.",
-    "keywords": [
-        "CSMS",
-        "Charging Process Rating"
-    ],
-    "authors": [
-        {
-            "name": "Mehran Barzandeh",
-            "email": "mehran@barzandeh.ir",
-            "homepage": "https://barzandeh.ir"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "ext-json": "*",
-        "monolog/monolog": "^2.3",
-        "php-di/php-di": "^6.3",
-        "slim/psr7": "^1.5",
-        "slim/slim": "^4.9"
-    },
-    "require-dev": {
-        "jangregor/phpstan-prophecy": "^1.0.0",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/extension-installer": "^1.1.0",
-        "phpstan/phpstan": "^1.4",
-        "phpunit/phpunit": "^9.5.16",
-        "roave/security-advisories": "dev-latest",
-        "squizlabs/php_codesniffer": "^3.6"
-    },
-    "config": {
-        "process-timeout": 0,
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "start": "php -S localhost:8080 -t public",
-        "test": "phpunit"
+  "name": "csmc/rate-cdr",
+  "description": "Implement a small RESTful API that Will apply the given rate to the corresponding CDR.",
+  "keywords": [
+    "CSMS",
+    "Charging Process Rating"
+  ],
+  "authors": [
+    {
+      "name": "Mehran Barzandeh",
+      "email": "mehran@barzandeh.ir",
+      "homepage": "https://barzandeh.ir"
     }
+  ],
+  "require": {
+    "php": "^8.1",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "monolog/monolog": "^2.3",
+    "php-di/php-di": "^6.3",
+    "robmorgan/phinx": "^0.12.10",
+    "slim/psr7": "^1.5",
+    "slim/slim": "^4.9"
+  },
+  "require-dev": {
+    "jangregor/phpstan-prophecy": "^1.0.0",
+    "phpspec/prophecy-phpunit": "^2.0",
+    "phpstan/extension-installer": "^1.1.0",
+    "phpstan/phpstan": "^1.4",
+    "phpunit/phpunit": "^9.5.16",
+    "roave/security-advisories": "dev-latest",
+    "squizlabs/php_codesniffer": "^3.6"
+  },
+  "config": {
+    "process-timeout": 0,
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "start": "php -S localhost:8000 -t public",
+    "test": "phpunit",
+    "analyse": "phpstan analyse",
+    "migration": "phinx"
+  }
 }
