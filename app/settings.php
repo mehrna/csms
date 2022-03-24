@@ -23,7 +23,7 @@ return static function (ContainerBuilder $containerBuilder) {
                 'db' => [
                     'driver' => 'mysql',
                     'host' => 'mysql',
-                    'username' => 'csms_user',
+                    'username' => 'root',
                     'database' => 'csms',
                     'password' => 'secret',
                     'charset' => 'utf8mb4',
@@ -41,6 +41,11 @@ return static function (ContainerBuilder $containerBuilder) {
                         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
                     ]
                 ],
+                'db_test' => [
+                    'username' => 'root',
+                    'database' => 'csms_test',
+                    'password' => 'secret',
+                ]
             ]);
         }
     ]);

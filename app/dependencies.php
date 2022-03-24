@@ -39,6 +39,14 @@ return static function (ContainerBuilder $containerBuilder) {
             $password = $dbSettings['password'];
             $charset = $dbSettings['charset'];
             $flags = $dbSettings['flags'];
+
+            if (TEST_ENV) {
+                $dbTestSettings = $settings->get('db_test');
+                $dbname = $dbTestSettings['database'];
+                $username = $dbTestSettings['username'];
+                $password = $dbTestSettings['password'];
+            }
+
             $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
             try {
