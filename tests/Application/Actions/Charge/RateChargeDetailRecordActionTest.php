@@ -34,10 +34,10 @@ class RateChargeDetailRecordActionTest extends TestCase
         $response = $app->handle($request);
 
         $payload = (string)$response->getBody();
-        $expectedPayload = new ActionPayload(200, [
+        $expectedPayload = [
             'overall' => 7.04,
             'components' => ['energy' => 3.277, 'time' => 2.767, 'transaction' => 1],
-        ]);
+        ];
         $serializedPayload = json_encode($expectedPayload, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
 
         $this->assertEquals($serializedPayload, $payload);
