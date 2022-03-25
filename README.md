@@ -69,7 +69,7 @@ Special Note
 -----
 **To meet functional requirements**
 
-The way that the response are formatted right now ( I mean on master branch commit [367b657](https://github.com/mehrna/csms/commit/367b657300c4b3b947e5cc81af65f706a512fba0) )is much more convenient and well designed than the way on the assessment need, by the way, to meet the Functional requirements, I did it the other way in this pull request.
+The way that the response are formatted right now ( I mean on master branch commit [367b657](https://github.com/mehrna/csms/commit/367b657300c4b3b947e5cc81af65f706a512fba0) )is much more convenient and well designed than the way on the assessment need, by the way, to meet the Functional requirements, I did it the other way in [this pull request](https://github.com/mehrna/csms/pull/1).
 
 API Documentation
 -----
