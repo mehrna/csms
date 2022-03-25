@@ -46,6 +46,11 @@ class RateChargeDetailRecordAction extends Action
         $rateCalculator = new RateCalculator($rate, $cdr);
         $this->logger->info('test', [$rateCalculator]);
 
-        return $this->respondWithData($rateCalculator);
+        $json = json_encode($rateCalculator, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+        $this->response->getBody()->write($json);
+
+        return $this->response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
     }
 }
